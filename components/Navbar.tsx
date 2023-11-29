@@ -4,23 +4,31 @@ import Image from 'next/image';
 import CustomButton from './CustomButton';
 
 const Navbar = () => {
-    const handleScroll = () => {
+    const handleLoginClick = () => {
 
-    }
+    };
+
     return (
         <header className="w-full absolute z-10">
             <nav className="max-w-[1440px] mx-auto flex justify-between sm:px-16 px-6">
                 <Link href="/" className='flex justify-center items-center'>
                     <Image src="/logo.svg" alt="Car Hub Logo" width={236} height={36} className="object-contain"></Image>
                 </Link>
-                <CustomButton
+                {/* <CustomButton
                     title="Trải Nghiệm"
                     containerStyles="bg-primary-blue text-white rounded-xl px-6 my-3"
-                    handleClick={handleScroll}
-                />
+                    handleClick={handleLoginClick}
+                /> */}
+                <Link href="/login" passHref>
+                    <CustomButton
+                        title="Trải Nghiệm"
+                        containerStyles="bg-primary-blue text-white rounded-xl px-6 my-3"
+                    />
+                </Link>
             </nav>
             <hr />
         </header>
     )
 }
+
 export default Navbar;
