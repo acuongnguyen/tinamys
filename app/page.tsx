@@ -1,3 +1,6 @@
+"use client";
+import { useEffect } from 'react';
+import { useGlobalContext } from './Context/store';
 import { CustomButton, Hero } from '@/components'
 import Image from 'next/image'
 

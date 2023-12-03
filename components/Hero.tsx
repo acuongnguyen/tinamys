@@ -1,6 +1,8 @@
 "use client";
 import Image from 'next/image';
 import CustomButton from './CustomButton';
+import { useEffect } from 'react';
+import { useGlobalContext } from '@/app/Context/store';
 
 const Hero = () => {
     const handleScroll = () => {

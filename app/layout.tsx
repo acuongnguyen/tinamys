@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { Footer, Navbar } from '@/components';
+import { GlobalContextProvider } from './Context/store';
 
 export const metadata: Metadata = {
-  title: 'Car Hub',
+  title: 'TinaMys',
   description: '',
 }
 
@@ -15,9 +16,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="relative">
-        <Navbar />
-        {children}
-        <Footer />
+        <GlobalContextProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </GlobalContextProvider>
       </body>
     </html>
   )
