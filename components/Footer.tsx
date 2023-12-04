@@ -6,7 +6,10 @@ const Footer = () => {
         <footer className="flex flex-col text-black-100 mt-5 border-t border-gray-100">
             <div className="flex max-md:flex-col flex-wrap justify-between gap-5 sm:px-16 px-6 py-10">
                 <div className="flex flex-col justify-start items-start gap-6">
-                    <Image src="/logo.svg" alt="Car Hub Logo" width={472} height={72} className="object-contain" />
+                    <Link href="/" className='flex justify-center items-center'>
+                        <Image src="/logo.svg" alt="Car Hub Logo" width={472} height={72} className="object-contain" />
+                    </Link>
+
                     <p className="text-base tex-gray-700">Email: contact@tinasoft.vn<br />
                         Số điện thoại: +(84) 246 329 5589<br />
                         Địa chỉ văn phòng: Tầng 4, Tòa nhà Ellipse Tower,<br />
