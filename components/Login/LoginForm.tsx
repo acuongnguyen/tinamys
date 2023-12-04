@@ -1,11 +1,15 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
+import { useRouter } from 'next/router';
 
-const LoginForm = ({ handleUsernameChange, handleEmailChange, handlePasswordChange, handleLogin }: any) => {
-    const handleSubmit = (e) => {
+const LoginForm = ({ handleUsernameChange, handlePasswordChange, handleLogin, router }: any) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        handleLogin();
+        const loggedInSuccessfully = await handleLogin();
+        if (loggedInSuccessfully) {
+            router.push('/');
+        }
     };
     return (
         <div className="flex justify-center items-center h-screen">
@@ -22,12 +26,12 @@ const LoginForm = ({ handleUsernameChange, handleEmailChange, handlePasswordChan
 
                 <div className="mb-4">
                     <label className="block mb-2 font-semibold">Email hoặc tên đăng nhập:</label>
-                    <input type="text" id="credential" name="credential" className="w-full border border-gray-300 rounded px-3 py-2" onChange={handleUsernameChange} />
+                    <input type="text" id="credential" name="credential" required className="w-full border border-gray-300 rounded px-3 py-2" onChange={handleUsernameChange} />
                 </div>
 
                 <div className="mb-4">
                     <label className="block mb-2 font-semibold">Mật khẩu:</label>
-                    <input type="password" id="password" name="password" className="w-full border border-gray-300 rounded px-3 py-2" onChange={handlePasswordChange} />
+                    <input type="password" id="password" name="password" required className="w-full border border-gray-300 rounded px-3 py-2" onChange={handlePasswordChange} />
                 </div>
 
                 <div className="flex items-center justify-between mb-2">
@@ -35,7 +39,11 @@ const LoginForm = ({ handleUsernameChange, handleEmailChange, handlePasswordChan
                 </div>
 
                 <div className="mb-4">
-                    <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded w-full mb-2">
+                    <button
+                        type="submit"
+                        className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded w-full mb-2"
+                        onClick={handleSubmit}
+                    >
                         Đăng nhập
                     </button>
                 </div>

@@ -21,12 +21,13 @@ const Hero = () => {
                 <p className="hero__subtitle">Cho phép lập mục tiêu theo chu kì năm, quý, tháng, tuần</p>
                 <p className="hero__subtitle">Quản lý checkin tiến độ mục tiêu, dự án công ty, nhóm</p>
                 <p className="hero__subtitle">Tự động nhắc việc và thông báo đến những người liên quan</p>
-                <div className=""><Image src="/image-section-one.png" alt="image-section one" width={1440} height={400} ></Image></div>
-                {/* <CustomButton
-                    title="Explore Cars"
+                <CustomButton
+                    title="Trải nhiệm ngay!"
                     containerStyles="bg-primary-blue text-white rounded-full mt-10"
                     handleClick={handleScroll}
-                /> */}
+                />
+                <div className=""><Image src="/image-section-one.png" alt="image-section one" width={1440} height={400} ></Image></div>
+
 
             </div>
             <div className="hero__image-container">

@@ -5,9 +5,7 @@ import CustomButton from './CustomButton';
 
 const Navbar = () => {
     const handleLoginClick = () => {
-
     };
-
     return (
         <header className="w-full absolute z-10">
             <nav className="max-w-[1440px] mx-auto flex justify-between sm:px-16 px-6">

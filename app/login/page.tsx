@@ -1,34 +1,31 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import RootLayout from '../layout';
 import LoginForm from '@/components/Login/LoginForm';
+import { GlobalContextProvider, useGlobalContext } from '../Context/store';
+import { useRouter } from 'next/router';
 
 const Login = () => {
     const [emailOrUsername, setEmailOrUsername] = useState('');
-    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const { loggedIn, setLoggedIn } = useGlobalContext();
 
     const handleUsernameChange = (e: any) => {
         setEmailOrUsername(e.target.value);
-        console.log('emailOrUsername', emailOrUsername);
-    };
-
-    const handleEmailChange = (e: any) => {
-        setEmail(e.target.value);
-        console.log('email', email);
     };
 
     const handlePasswordChange = (e: any) => {
         setPassword(e.target.value);
-        console.log('password', password);
     };
+
+    const router = useRouter();
+
 
     const handleLogin = async () => {
         try {
 
             const loginData = {
-                username: emailOrUsername,
-                email: 'cuongvp1102@gmail.com',
                 emailOrUsername: emailOrUsername,
                 password: password,
             };
@@ -44,16 +41,13 @@ const Login = () => {
 
             if (response.ok) {
                 const responseData = await response.json();
-                const { accessToken, refreshToken, user } = responseData;
-
+                const { accessToken, refreshToken, user } = responseData.data;
                 localStorage.setItem('accessToken', accessToken);
                 localStorage.setItem('refreshToken', refreshToken);
-
                 if (user) {
+                    setLoggedIn(true);
                     console.log('Login successful');
-                    console.log('User info:', user);
-                    console.log('accessToken:', accessToken);
-                    console.log('refreshToken:', refreshToken);
+                    console.log('loggedIn', loggedIn);
                 } else {
                     console.log('Login successful but no user info provided');
                 }
@@ -68,13 +62,21 @@ const Login = () => {
         }
     };
 
+    useEffect(() => {
+        // Your logic to execute after successful login
+        if (loggedIn) {
+            console.log('User has logged in');
+            // Perform any actions after successful login
+            // Redirect, update UI, etc.
+        }
+    }, [loggedIn]);
     return (
-        <RootLayout hideNavFooter={true}>
+        <RootLayout hideNavFooter={true} loggedIn={false}>
             <LoginForm
                 handleUsernameChange={handleUsernameChange}
-                handleEmailChange={handleEmailChange}
                 handlePasswordChange={handlePasswordChange}
                 handleLogin={handleLogin}
+                router={router}
             />
         </RootLayout>
     );
