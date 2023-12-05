@@ -28,7 +28,7 @@ const AppHeader = () => {
                 <Menu.Item key="2">Sản phẩm</Menu.Item>
                 <Menu.Item key="3">Giới thiệu</Menu.Item>
                 <Menu.Item key="4">Search</Menu.Item>
-                {isLoggedIn && (
+                {!loggedIn && (
                     <Menu.Item key="5" onClick={handleLogout}>Đăng xuất</Menu.Item>
                 )}
             </Menu>

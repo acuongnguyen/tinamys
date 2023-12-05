@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
+import { useRouter } from 'next/router';
 
 const LoginForm = ({ handleUsernameChange, handlePasswordChange, handleLogin }: any) => {
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
         handleLogin();
     };

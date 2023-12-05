@@ -3,6 +3,7 @@ import Image from 'next/image';
 import CustomButton from './CustomButton';
 import { useEffect } from 'react';
 import { useGlobalContext } from '@/app/Context/store';
+import Link from 'next/link';
 
 const Hero = () => {
     const handleScroll = () => {
@@ -21,18 +22,21 @@ const Hero = () => {
                 <p className="hero__subtitle">Cho phép lập mục tiêu theo chu kì năm, quý, tháng, tuần</p>
                 <p className="hero__subtitle">Quản lý checkin tiến độ mục tiêu, dự án công ty, nhóm</p>
                 <p className="hero__subtitle">Tự động nhắc việc và thông báo đến những người liên quan</p>
-                <CustomButton
-                    title="Trải nhiệm ngay!"
-                    containerStyles="bg-primary-blue text-white rounded-full mt-10"
-                    handleClick={handleScroll}
-                />
+
+                <Link href="/login" passHref>
+                    <CustomButton
+                        title="Trải nhiệm ngay!"
+                        containerStyles="bg-primary-blue text-white rounded-full mt-10"
+
+                    />
+                </Link>
                 <div className=""><Image src="/image-section-one.png" alt="image-section one" width={1440} height={400} ></Image></div>
 
 
             </div>
             <div className="hero__image-container">
                 <div className="hero__image">
-                    {/* <Image src="/hero.png" alt="hero" fill className="object-contain" /> */}
+
                 </div>
             </div>
         </div>

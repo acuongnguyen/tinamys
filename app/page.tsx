@@ -14,12 +14,12 @@ export default function Home() {
 
   return (
     <main className="overflow-hidden">
-      {!isLoggedIn ?
+      {!loggedIn ?
         <RootLayout>
           <Layout>
-            {isLoggedIn ? '' : <Navbar />}
+            {loggedIn ? '' : <Navbar />}
             <Hero />
-            {isLoggedIn ? '' : <Footer />}
+            {loggedIn ? '' : <Footer />}
           </Layout>
         </RootLayout>
         :

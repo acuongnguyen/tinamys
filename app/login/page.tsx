@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react';
 import RootLayout from '../layout';
 import LoginForm from '@/components/Login/LoginForm';
 import { useGlobalContext } from '../Context/store';
-
+import { useRouter } from 'next/navigation';
 const Login = () => {
     const [emailOrUsername, setEmailOrUsername] = useState('');
     const [password, setPassword] = useState('');
-
+    const router = useRouter();
     const { loggedIn, setLoggedIn } = useGlobalContext();
 
     console.log('loggedIn-1', loggedIn);
@@ -46,7 +46,6 @@ const Login = () => {
                     setLoggedIn(true);
                     console.log('Login successful');
                     console.log('loggedIn-after', loggedIn);
-                    localStorage.setItem('isLoggedIn', 'true');
                 } else {
                     console.log('Login successful but no user info provided');
                 }
@@ -64,15 +63,9 @@ const Login = () => {
     useEffect(() => {
         console.log('loggedIn changed:', loggedIn);
         if (loggedIn) {
-            window.location.href = '/';
+            router.push("/");
         }
     }, [loggedIn]);
-
-    const redirectToHome = () => {
-        if (loggedIn) {
-            window.location.href = '/';
-        }
-    };
 
     return (
         <RootLayout>
