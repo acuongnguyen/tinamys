@@ -1,15 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
-import { useRouter } from 'next/router';
 
-const LoginForm = ({ handleUsernameChange, handlePasswordChange, handleLogin, router }: any) => {
+const LoginForm = ({ handleUsernameChange, handlePasswordChange, handleLogin }: any) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const loggedInSuccessfully = await handleLogin();
-        if (loggedInSuccessfully) {
-            router.push('/');
-        }
+        handleLogin();
     };
     return (
         <div className="flex justify-center items-center h-screen">

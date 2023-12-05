@@ -1,17 +1,18 @@
 "use client";
 import { createContext, useContext, Dispatch, SetStateAction, useState } from "react";
 
-interface ContextProps {
-    loggedIn: boolean;
-    setLoggedIn: Dispatch<SetStateAction<boolean>>;
+type GlobalContextProviderProps = {
+    children: React.ReactNode;
 }
 
-const GlobalContext = createContext<ContextProps>({
-    loggedIn: false,
-    setLoggedIn: () => { },
-})
+type ContextProps = {
+    loggedIn: boolean;
+    setLoggedIn: React.Dispatch<SetStateAction<boolean>>;
+}
 
-export const GlobalContextProvider = ({ children }) => {
+const GlobalContext = createContext<ContextProps | null>(null);
+
+export const GlobalContextProvider = ({ children }: GlobalContextProviderProps) => {
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
     return (
         <GlobalContext.Provider value={{ loggedIn, setLoggedIn }}>
@@ -19,4 +20,12 @@ export const GlobalContextProvider = ({ children }) => {
         </GlobalContext.Provider>
     )
 }
-export const useGlobalContext = () => useContext(GlobalContext);
+export const useGlobalContext = () => {
+    const context = useContext(GlobalContext);
+    if (!context) {
+        throw new Error(
+            "useGlobalContext must be used within a GlobalContextProvider"
+        )
+    }
+    return context;
+};

@@ -8,9 +8,14 @@ const { Header } = Layout;
 
 const AppHeader = () => {
     const { loggedIn, setLoggedIn } = useGlobalContext();
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     console.log('loggedIn-header', loggedIn);
     const handleLogout = () => {
+        console.log('loggedIn before logout', loggedIn);
         setLoggedIn(false);
+        console.log('loggedIn after logout', loggedIn);
+        window.location.href = '/';
+        localStorage.clear();
     };
     return (
         <Header style={{ maxHeight: '10vh', backgroundColor: '#ffffff' }}>
@@ -23,11 +28,11 @@ const AppHeader = () => {
                 <Menu.Item key="2">Sản phẩm</Menu.Item>
                 <Menu.Item key="3">Giới thiệu</Menu.Item>
                 <Menu.Item key="4">Search</Menu.Item>
-                {!loggedIn && (
+                {isLoggedIn && (
                     <Menu.Item key="5" onClick={handleLogout}>Đăng xuất</Menu.Item>
                 )}
             </Menu>
-        </Header >
+        </ Header>
     );
 };
 
