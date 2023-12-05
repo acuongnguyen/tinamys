@@ -22,15 +22,6 @@ const AppSider = () => {
                         Blog
                     </Link>
                 </Menu.Item>
-                {/* <Menu.SubMenu key="sub2" title="Team">
-                    <Menu.Item key="6">Team 1</Menu.Item>
-                    <Menu.Item key="8">Team 2</Menu.Item>
-                </Menu.SubMenu>
-                <Menu.Item key="9">
-                    <Link href="/#" style={{ textDecoration: 'none' }}>
-                        Files
-                    </Link>
-                </Menu.Item> */}
             </Menu>
         </Sider >
     );

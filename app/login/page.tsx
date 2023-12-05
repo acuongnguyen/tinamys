@@ -2,14 +2,15 @@
 import React, { useEffect, useState } from 'react';
 import RootLayout from '../layout';
 import LoginForm from '@/components/Login/LoginForm';
-import { GlobalContextProvider, useGlobalContext } from '../Context/store';
-import { useRouter } from 'next/router';
+import { useGlobalContext } from '../Context/store';
 
 const Login = () => {
     const [emailOrUsername, setEmailOrUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const { loggedIn, setLoggedIn } = useGlobalContext();
+
+    console.log('loggedIn-1', loggedIn);
 
     const handleUsernameChange = (e: any) => {
         setEmailOrUsername(e.target.value);
@@ -18,10 +19,6 @@ const Login = () => {
     const handlePasswordChange = (e: any) => {
         setPassword(e.target.value);
     };
-
-    const router = useRouter();
-
-
     const handleLogin = async () => {
         try {
 
@@ -44,10 +41,12 @@ const Login = () => {
                 const { accessToken, refreshToken, user } = responseData.data;
                 localStorage.setItem('accessToken', accessToken);
                 localStorage.setItem('refreshToken', refreshToken);
-                if (user) {
+                if (accessToken) {
+                    console.log('loggedIn-before', loggedIn);
                     setLoggedIn(true);
                     console.log('Login successful');
-                    console.log('loggedIn', loggedIn);
+                    console.log('loggedIn-after', loggedIn);
+                    localStorage.setItem('isLoggedIn', 'true');
                 } else {
                     console.log('Login successful but no user info provided');
                 }
@@ -56,27 +55,31 @@ const Login = () => {
                 const errorData = await response.json();
                 console.error('Login failed:', errorData.message);
             }
-        } catch (error) {
+        } catch (error: any) {
             // Handle network or other errors
             console.error('Login failed:', error.message);
         }
     };
 
     useEffect(() => {
-        // Your logic to execute after successful login
+        console.log('loggedIn changed:', loggedIn);
         if (loggedIn) {
-            console.log('User has logged in');
-            // Perform any actions after successful login
-            // Redirect, update UI, etc.
+            window.location.href = '/';
         }
     }, [loggedIn]);
+
+    const redirectToHome = () => {
+        if (loggedIn) {
+            window.location.href = '/';
+        }
+    };
+
     return (
-        <RootLayout hideNavFooter={true} loggedIn={false}>
+        <RootLayout>
             <LoginForm
                 handleUsernameChange={handleUsernameChange}
                 handlePasswordChange={handlePasswordChange}
                 handleLogin={handleLogin}
-                router={router}
             />
         </RootLayout>
     );
